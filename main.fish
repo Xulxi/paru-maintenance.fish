@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 # ---------------------------------------------
-# Paru maintenance script for Manjaro / BTRFS
+# Paru maintenance script for CachyOS / BTRFS
 # Automatically creates a Timeshift snapshot before updates
 # ---------------------------------------------
 
@@ -56,9 +56,6 @@ echo
 # 3️⃣ clear package cache
 echo $green"Clearing package cache..."$normal
 paru -Sc --noconfirm >/dev/null
-if test $status -ne 0
-    set failed 1
-end
 echo
 
 # 4️⃣ remove orphaned packages
