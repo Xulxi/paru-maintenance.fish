@@ -37,9 +37,9 @@ set failed 0
 echo $yellow"==== Paru Maintenance ===="$normal
 echo
 
-# 1️⃣ create Timeshift snapshot
-echo $green"Creating pre-update Timeshift snapshot..."$normal
-sudo timeshift --create --comments pre-update --tags O >/dev/null
+# 1️⃣ create Snapper pre-update snapshot
+echo $green"Creating pre-update Snapper snapshot..."$normal
+sudo snapper create --description pre-update --cleanup-algorithm number >/dev/null
 if test $status -ne 0
     set failed 1
 end
