@@ -96,7 +96,7 @@ echo
 if test $failed -eq 1
     echo $red"One or more commands produced errors."$normal
     if test $shutdown -eq 1
-        read -P $yellow"Shutdown anyway? [Y/n] "$normal choice
+        read -P $yellow"Shutdown anyway? [y/N] "$normal choice
         if test $choice != y -a $choice != Y
             exit
         end
