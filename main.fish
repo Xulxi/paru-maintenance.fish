@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 # ---------------------------------------------
 # Paru maintenance script for CachyOS / BTRFS
-# Automatically creates a Timeshift snapshot before updates
+# Automatically creates a Snapper snapshot before updates
 # ---------------------------------------------
 
 # force sudo
@@ -45,20 +45,12 @@ if test $status -ne 0
 end
 echo
 
-# 2️⃣ update GRUB so snapshot appears in boot menu
-echo $green"Updating GRUB configuration..."$normal
-sudo grub-mkconfig -o /boot/grub/grub.cfg >/dev/null
-if test $status -ne 0
-    set failed 1
-end
-echo
-
-# 3️⃣ clear package cache
+# 2️⃣ clear package cache
 echo $green"Clearing package cache..."$normal
 paru -Sc --noconfirm >/dev/null
 echo
 
-# 4️⃣ remove orphaned packages
+# 3️⃣ remove orphaned packages
 echo $green"Removing orphaned packages..."$normal
 if paru -Qdtq >/dev/null
     paru -Rns --noconfirm (paru -Qdtq) >/dev/null
@@ -68,7 +60,7 @@ if paru -Qdtq >/dev/null
 end
 echo
 
-# 5️⃣ fetch pkglist safely
+# 4️⃣ fetch pkglist safely
 echo $green"Fetching pkglist..."$normal
 if test -f ~/pkglist1.txt
     mv ~/pkglist1.txt ~/pkglist2.txt
@@ -79,7 +71,7 @@ if test $status -ne 0
 end
 echo
 
-# 6️⃣ update all packages (official + AUR + devel)
+# 5️⃣ update all packages (official + AUR + devel)
 echo $green"Updating all packages..."$normal
 echo
 paru -Syu --devel --needed --noconfirm
